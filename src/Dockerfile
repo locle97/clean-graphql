@@ -7,4 +7,9 @@ COPY  ./CleanGraphQL.Core/*.csproj ./CleanGraphQL.Core/
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -o app
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+COPY --from=build app app
+EXPOSE 80
+EXPOSE 443
 ENTRYPOINT ["dotnet", "./app/CleanGraphQL.GraphQL.dll"]

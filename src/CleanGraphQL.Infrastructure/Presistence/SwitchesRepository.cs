@@ -12,8 +12,12 @@ public class SwitchesRepository : ISwitchesRepository
 
     public SwitchesRepository(IOptions<MongoDbSetting> mongoDbSetting)
     {
-        var mongoClient = new MongoClient(
-            mongoDbSetting.Value.ConnectionString);
+        ArgumentNullException.ThrowIfNullOrEmpty(mongoDbSetting.Value.ConnectionString);
+
+        var settings = MongoClientSettings.FromConnectionString(mongoDbSetting.Value.ConnectionString);
+        settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+        var mongoClient = new MongoClient(settings);
 
         var mongoDatabase = mongoClient.GetDatabase(
             mongoDbSetting.Value.DatabaseName);
@@ -29,7 +33,15 @@ public class SwitchesRepository : ISwitchesRepository
 
     public Task<List<Switch>> GetAll()
     {
-        return _switchesCollection.Find(t => true).ToListAsync();
+        try
+        {
+            return _switchesCollection.Find(t => true).ToListAsync();
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 }
 

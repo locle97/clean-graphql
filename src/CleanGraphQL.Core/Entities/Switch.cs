@@ -19,15 +19,26 @@ public class Switch
 
     public float? Force { get; set; }
 
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
+    public float? ForceDeviation { get; set; }
+
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
     public float? BottomForce { get; set; }
 
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
+    public float? BottomForceDiviation { get; set; }
+
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
     public float? PreTravel { get; set; }
 
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
+    public float? PreTravelDeviation { get; set; }
+
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
     public float? TotalTravel { get; set; }
 
+    [BsonRepresentation(BsonType.Double, AllowTruncation=true)]
+    public float? TotalTravelDeviation { get; set; }
+
     public string? Image { get; set; }
-
-    public int? BrandId { get; set; }
-
-    public Brand? Brand { get; set; }
 }

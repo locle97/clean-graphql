@@ -3,6 +3,8 @@ using CleanGraphQL.Core.Interfaces;
 using CleanGraphQL.Core.Settings;
 using CleanGraphQL.GraphQL;
 using CleanGraphQL.Infrastructure.Presistence;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.Configure<MongoDbSetting>(
 
 var app = builder.Build();
 
+app.MapGet("/", (ISwitchesRepository switchesRepository) => switchesRepository.GetAll());
 app.MapGraphQL();
 
 app.Run();
