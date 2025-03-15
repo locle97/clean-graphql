@@ -7,12 +7,14 @@ namespace CleanGraphQL.GraphQL.Queries;
 [ExtendObjectType<Switch>]
 public class SwitchesNode
 {
-    public async Task<Brand?> GetBrandAsync([Parent] Switch s, 
-            [Service] IMediator mediator, 
-            CancellationToken cancellationToken)
+    public async Task<Brand?> GetBrandAsync([Parent] Switch s,
+                                            [Service] IMediator mediator,
+                                            CancellationToken cancellationToken)
     {
-        return s.BrandId is not null
-            ? await mediator.Send(new GetBrandQuery { Id = s.BrandId }, cancellationToken)
-            : null;
+        if (s.BrandId is null)
+            return null;
+
+        return await mediator.Send(new GetBrandQuery { Id = s.BrandId },
+                                   cancellationToken);
     }
 }

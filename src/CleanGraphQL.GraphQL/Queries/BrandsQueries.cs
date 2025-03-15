@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CleanGraphQL.GraphQL.Queries;
 
-[ExtendObjectType(OperationTypeNames.Query)]
+[QueryType]
 public class BrandsQueries
 {
     public async Task<IQueryable<Brand>> GetBrands([Service] IMediator mediator)
