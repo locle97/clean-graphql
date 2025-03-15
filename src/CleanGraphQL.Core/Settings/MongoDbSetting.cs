@@ -7,4 +7,6 @@ public class MongoDbSetting
     public string? DatabaseName { get; set; }
 
     public string? SwitchesCollectionName { get; set; }
+
+    public string? BrandsCollectionName { get; set; }
 }

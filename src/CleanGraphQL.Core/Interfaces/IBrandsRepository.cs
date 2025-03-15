@@ -4,7 +4,7 @@ namespace CleanGraphQL.Core.Interfaces;
 
 public interface IBrandsRepository
 {
-    Task<IEnumerable<Brand>> GetAll();
+    IQueryable<Brand> GetAll();
 
-    Task<Brand?> Get(int id);
+    Task<Brand> Get(string id);
 }

@@ -1,30 +1,48 @@
 using CleanGraphQL.Core.Entities;
 using CleanGraphQL.Core.Interfaces;
+using CleanGraphQL.Core.Settings;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace CleanGraphQL.Infrastructure.Presistence;
 
 public class BrandsRepository : IBrandsRepository
 {
-    private readonly IEnumerable<Brand> BrandCollection = new List<Brand>
-        {
-            new Brand {
-                Id = 1,
-                Name = "Cherry"
-            },
-            new Brand {
-                Id = 2,
-                Name = "Gateron"
-            }
-        };
+    private readonly IMongoCollection<Brand> _switchesCollection;
 
-    Task<Brand?> IBrandsRepository.Get(int id)
+    public BrandsRepository(IOptions<MongoDbSetting> mongoDbSetting)
     {
-        return Task.FromResult<Brand?>(BrandCollection.FirstOrDefault(t => t.Id == id));
+        ArgumentNullException.ThrowIfNullOrEmpty(mongoDbSetting.Value.ConnectionString);
+
+        var settings = MongoClientSettings.FromConnectionString(mongoDbSetting.Value.ConnectionString);
+        settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+
+        var mongoClient = new MongoClient(settings);
+
+        var mongoDatabase = mongoClient.GetDatabase(
+            mongoDbSetting.Value.DatabaseName);
+
+        _switchesCollection = mongoDatabase.GetCollection<Brand>(
+            mongoDbSetting.Value.BrandsCollectionName);
     }
 
-    Task<IEnumerable<Brand>> IBrandsRepository.GetAll()
+    public Task<Brand> Get(string id)
     {
-        return Task.FromResult<IEnumerable<Brand>>(BrandCollection);
+        return _switchesCollection.Find(t => t.Id == id).FirstOrDefaultAsync();
+    }
+
+    public IQueryable<Brand> GetAll()
+    {
+        try
+        {
+            var query = _switchesCollection.AsQueryable();
+            return query;
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 }
 

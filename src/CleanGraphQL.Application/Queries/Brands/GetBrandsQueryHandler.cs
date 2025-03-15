@@ -5,21 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanGraphQL.Application.Queries;
 
-public class GetBrandsQueryHandler : IRequestHandler<GetBrandsQuery, IEnumerable<Brand>>
+public class GetBrandsQueryHandler : IRequestHandler<GetBrandsQuery, IQueryable<Brand>>
 {
-    private readonly IBrandsRepository _brandRepository;
+    private readonly IBrandsRepository _switchRepository;
     private readonly ILogger<GetBrandsQueryHandler> _logger;
 
-    public GetBrandsQueryHandler(IBrandsRepository brandRepository,
+    public GetBrandsQueryHandler(IBrandsRepository switchRepository,
                                    ILogger<GetBrandsQueryHandler> logger)
     {
-        _brandRepository = brandRepository;
+        _switchRepository = switchRepository;
         _logger = logger;
     }
 
-    public Task<IEnumerable<Brand>> Handle(GetBrandsQuery request,
-                                            CancellationToken cancellationToken)
+    Task<IQueryable<Brand>> IRequestHandler<GetBrandsQuery, IQueryable<Brand>>.Handle(GetBrandsQuery request, CancellationToken cancellationToken)
     {
-        return _brandRepository.GetAll();
+        return Task.FromResult(_switchRepository.GetAll());
     }
 }

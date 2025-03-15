@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanGraphQL.Application.Queries;
 
-public class GetBrandQuery: IRequest<Brand?>
+public class GetBrandQuery: IRequest<Brand>
 {
-    public required int Id { get; set; }
+    public required string Id { get; set; }
 }

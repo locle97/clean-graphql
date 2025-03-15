@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanGraphQL.Application.Queries;
 
-public class GetBrandsQuery: IRequest<IEnumerable<Brand>>
+public class GetBrandsQuery: IRequest<IQueryable<Brand>>
 {
 }
 

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanGraphQL.Application.Queries;
 
-public class GetSwitchesQuery: IRequest<List<Switch>>
+public class GetSwitchesQuery: IRequest<IQueryable<Switch>>
 {
 }
 

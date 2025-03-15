@@ -31,11 +31,12 @@ public class SwitchesRepository : ISwitchesRepository
         return _switchesCollection.Find(t => t.Id == id).FirstOrDefaultAsync();
     }
 
-    public Task<List<Switch>> GetAll()
+    public IQueryable<Switch> GetAll()
     {
         try
         {
-            return _switchesCollection.Find(t => true).ToListAsync();
+            var query = _switchesCollection.AsQueryable();
+            return query;
         }
         catch (System.Exception ex)
         {

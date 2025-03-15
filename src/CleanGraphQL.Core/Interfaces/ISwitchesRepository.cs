@@ -4,7 +4,7 @@ namespace CleanGraphQL.Core.Interfaces;
 
 public interface ISwitchesRepository
 {
-    Task<List<Switch>> GetAll();
+    IQueryable<Switch> GetAll();
 
     Task<Switch> Get(string id);
 }

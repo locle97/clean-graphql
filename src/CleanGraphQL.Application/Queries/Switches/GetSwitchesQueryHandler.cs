@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanGraphQL.Application.Queries;
 
-public class GetSwitchesQueryHandler : IRequestHandler<GetSwitchesQuery, List<Switch>>
+public class GetSwitchesQueryHandler : IRequestHandler<GetSwitchesQuery, IQueryable<Switch>>
 {
     private readonly ISwitchesRepository _switchRepository;
     private readonly ILogger<GetSwitchesQueryHandler> _logger;
@@ -17,9 +17,8 @@ public class GetSwitchesQueryHandler : IRequestHandler<GetSwitchesQuery, List<Sw
         _logger = logger;
     }
 
-    public Task<List<Switch>> Handle(GetSwitchesQuery request,
-                                            CancellationToken cancellationToken)
+    Task<IQueryable<Switch>> IRequestHandler<GetSwitchesQuery, IQueryable<Switch>>.Handle(GetSwitchesQuery request, CancellationToken cancellationToken)
     {
-        return _switchRepository.GetAll();
+        return Task.FromResult(_switchRepository.GetAll());
     }
 }

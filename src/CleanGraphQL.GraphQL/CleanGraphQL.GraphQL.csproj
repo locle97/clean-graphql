@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="HotChocolate" Version="15.0.3" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="15.0.3" />
+    <PackageReference Include="HotChocolate.Data" Version="15.0.3" />
     <PackageReference Include="mediatr" Version="12.4.1" />
     <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
   </ItemGroup>

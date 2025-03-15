@@ -1,10 +1,8 @@
 using CleanGraphQL.Application.Queries;
 using CleanGraphQL.Core.Interfaces;
 using CleanGraphQL.Core.Settings;
-using CleanGraphQL.GraphQL;
+using CleanGraphQL.GraphQL.Queries;
 using CleanGraphQL.Infrastructure.Presistence;
-using MongoDB.Bson;
-using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +13,11 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(ty
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>();
+    .AddQueryType()
+    .AddTypeExtension<SwitchesQueries>()
+    .AddTypeExtension<BrandsQueries>()
+    .AddTypeExtension<SwitchesNode>()
+    .AddFiltering();
 
 builder.Services.Configure<MongoDbSetting>(
     builder.Configuration.GetSection("MongoDb"));
