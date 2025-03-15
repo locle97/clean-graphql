@@ -24,7 +24,6 @@ builder.Services.Configure<MongoDbSetting>(
 
 var app = builder.Build();
 
-app.MapGet("/", (ISwitchesRepository switchesRepository) => switchesRepository.GetAll());
 app.MapGraphQL();
 
 app.Run();
