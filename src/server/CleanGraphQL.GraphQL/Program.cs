@@ -11,6 +11,8 @@ builder.Services.AddScoped<ISwitchesRepository, SwitchesRepository>()
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(GetSwitchesQuery)));
 
+builder.Services.AddCors();
+
 builder.Services
     .AddGraphQLServer()
     .AddQueryType()
@@ -23,6 +25,12 @@ builder.Services.Configure<MongoDbSetting>(
     builder.Configuration.GetSection("MongoDb"));
 
 var app = builder.Build();
+
+string cors = builder.Configuration.GetValue<string>("CORSOrigins") ?? string.Empty;
+string[] corsUrls = cors.Split(';');
+app.UseCors(policy => policy.WithOrigins(corsUrls)
+                            .AllowAnyHeader()
+                            .AllowAnyMethod());
 
 app.MapGraphQL();
 
