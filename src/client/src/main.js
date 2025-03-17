@@ -9,15 +9,29 @@ const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
     cache,
-    uri: 'https://rickandmortyapi.com/graphql',
+    uri: 'http://localhost:5255/graphql',
 })
 
 import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+    faLayerGroup,
+    faMapPin,
+    faAngleDown,
+    faAngleDoubleDown,
+    faPlay,
+    faForward
+} from "@fortawesome/free-solid-svg-icons";
 import {
     faGithub
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(faGithub);
+library.add(faLayerGroup);
+library.add(faMapPin);
+library.add(faAngleDown);
+library.add(faAngleDoubleDown);
+library.add(faPlay);
+library.add(faForward);
 
 const app = createApp({
     setup: () => {
