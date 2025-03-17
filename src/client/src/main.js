@@ -12,6 +12,12 @@ const apolloClient = new ApolloClient({
     uri: 'https://rickandmortyapi.com/graphql',
 })
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+    faGithub
+} from "@fortawesome/free-brands-svg-icons";
+
+library.add(faGithub);
 
 const app = createApp({
     setup: () => {

@@ -5,11 +5,10 @@
 </script>
 
 <template>
-    <div class="container mx-auto">
-        <div class="flex flex-col items-center">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center gap-16">
             <SwitchListHeader />
             <SwitchList />
-            <Pagination />
         </div>
     </div>
 </template>

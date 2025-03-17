@@ -1,1 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap');
 @import "tailwindcss";
+
+@theme {
+    --font-libre: "Libre Baskerville", sans-serif;
+    --font-pt: "PT Mono";
+
+    --color-green: #D2FBA4;
+    --color-purple: #D8AEFF;
+}
