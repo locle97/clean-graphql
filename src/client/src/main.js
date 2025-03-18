@@ -4,6 +4,10 @@ import App from './App.vue'
 import { provide, h } from 'vue';
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
+import { createRouter, createWebHistory } from 'vue-router'
+
+import SwitchListPage from './SwitchList/SwitchListPage.vue';
+import Home from './components/Home.vue';
 
 const cache = new InMemoryCache()
 
@@ -19,7 +23,8 @@ import {
     faAngleDown,
     faAngleDoubleDown,
     faPlay,
-    faForward
+    faForward,
+    faX
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faGithub
@@ -32,12 +37,22 @@ library.add(faAngleDown);
 library.add(faAngleDoubleDown);
 library.add(faPlay);
 library.add(faForward);
+library.add(faX);
+
+const routes = [
+  { path: '/', component: SwitchListPage },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
 
 const app = createApp({
     setup: () => {
         provide(DefaultApolloClient, apolloClient);
     },
     render: () => h(App)
-})
+}).use(router)
 
 app.mount('#app')
