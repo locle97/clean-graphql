@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
         <a href="/#">
         <h1 class="font-pt text-4xl font-bold">KeebSwitches</h1>
         </a>
-        <button class="text-xl px-4 py-2 border-2 border-black rounded-lg bg-lime-200 
+        <a target="_blank" href="https://github.com/locle97/clean-graphql" class="text-xl px-4 py-2 border-2 border-black rounded-lg bg-lime-200 
                        shadow-[3px_3px_0px_black,8px_8px_0px_rgb(200,160,255)] cursor-pointer">
             Github
             <FontAwesomeIcon :icon="['fab', 'github']" class="icon alt" />
-        </button>
+        </a>
 
     </div>
 </template>
