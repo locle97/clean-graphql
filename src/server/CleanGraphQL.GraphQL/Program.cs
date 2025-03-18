@@ -1,8 +1,10 @@
 using CleanGraphQL.Application.Queries;
 using CleanGraphQL.Core.Interfaces;
 using CleanGraphQL.Core.Settings;
+using CleanGraphQL.GraphQL;
 using CleanGraphQL.GraphQL.Queries;
 using CleanGraphQL.Infrastructure.Presistence;
+using HotChocolate.Data.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ builder.Services
     .AddTypeExtension<SwitchesQueries>()
     .AddTypeExtension<BrandsQueries>()
     .AddTypeExtension<SwitchesNode>()
+    .AddConvention<IFilterConvention, CustomConvention>()
     .AddFiltering();
 
 builder.Services.Configure<MongoDbSetting>(

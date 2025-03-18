@@ -7,7 +7,7 @@ namespace CleanGraphQL.GraphQL.Queries;
 [QueryType]
 public class SwitchesQueries
 {
-    [UsePaging]
+    [UseOffsetPaging]
     [UseFiltering]
     public async Task<IQueryable<Switch>> GetSwitches([Service] IMediator mediator)
     {
