@@ -35,6 +35,7 @@ app.UseCors(policy => policy.WithOrigins(corsUrls)
                             .AllowAnyHeader()
                             .AllowAnyMethod());
 
+app.MapGet("/", () => "Hello world!");
 app.MapGraphQL();
 
 app.Run();
