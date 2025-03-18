@@ -7,13 +7,14 @@ import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import SwitchListPage from './SwitchList/SwitchListPage.vue';
-import Home from './components/Home.vue';
+
+const API_URL = import.meta.env.VITE_API_URL
 
 const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
     cache,
-    uri: 'http://localhost:5255/graphql',
+    uri: API_URL
 })
 
 import { library } from "@fortawesome/fontawesome-svg-core";
