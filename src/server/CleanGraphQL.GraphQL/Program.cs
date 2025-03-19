@@ -8,6 +8,9 @@ using HotChocolate.Data.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<MongoDbSetting>(
+    builder.Configuration.GetSection("MongoDb"));
+
 builder.Services.AddScoped<ISwitchesRepository, SwitchesRepository>()
                 .AddScoped<IBrandsRepository, BrandsRepository>();
 
@@ -24,9 +27,6 @@ builder.Services
     .AddConvention<IFilterConvention, CustomConvention>()
     .AddFiltering();
 
-builder.Services.Configure<MongoDbSetting>(
-    builder.Configuration.GetSection("MongoDb"));
-
 var app = builder.Build();
 
 string cors = builder.Configuration.GetValue<string>("CORSOrigins") ?? string.Empty;
@@ -36,6 +36,7 @@ app.UseCors(policy => policy.WithOrigins(corsUrls)
                             .AllowAnyMethod());
 
 app.MapGet("/", () => "Hello world!");
+app.MapGet("/switches", (ISwitchesRepository repo) => repo.GetAll());
 app.MapGraphQL();
 
 app.Run();
